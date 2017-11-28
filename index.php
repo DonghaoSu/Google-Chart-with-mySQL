@@ -78,7 +78,8 @@ $qresult= mysqli_query($mysqli,$query);
     </script>
     
   </head>
-
+<title>DASHBOARD</title>
+<h1>DASHBOARD</h1>
   <body>
 <!--Div that will hold the pie chart-->
     <div id="chart_div" style="width:400; height:300"></div>
