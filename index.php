@@ -15,9 +15,12 @@ if($mysqli->connect_error){
     die("Connection failed: ". $mysqli->connect_error);
 }
 
+//for pie chart
 $query = "SELECT instance_name,num_user FROM instance";
 $qresult= mysqli_query($mysqli,$query);
 
+//for the first line chart
+//$query1 = "select "
 // $results = array();
 
 // while ($res = $qresult->fetch_assoc()) {
@@ -67,8 +70,8 @@ $qresult= mysqli_query($mysqli,$query);
       			]);
 
       // Set chart options
-      var options = {'title':'Number of Users in Different Community',
-                     'width':400,
+      var options = {'title':'Number of Users',
+                     'width':700,
                      'height':300};
 
       // Instantiate and draw our chart, passing in some options.
@@ -76,13 +79,40 @@ $qresult= mysqli_query($mysqli,$query);
       chart.draw(data, options);
     }
     </script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'San Jose Police Department', 'San Jose State University', 'San Jose Central Hospital'],
+          ['2014',  1000,      400,123],
+          ['2015',  1170,      460,321],
+          ['2016',  660,       1120,1000],
+          ['2017',  1030,      540,1234]
+        ]);
+
+        var options = {
+          title: 'User Activities',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
     
   </head>
 <title>DASHBOARD</title>
 <h1>DASHBOARD</h1>
   <body>
-<!--Div that will hold the pie chart-->
-    <div id="chart_div" style="width:400; height:300"></div>
+	<div id="curve_chart" style="width: 1300px; height: 300px"></div>
+    <div id="chart_div" style="width:700; height:300"></div>
+    <!-- <div id="chart_div" style="width:700; height:300"></div> -->
   </body>
 </html>
 		
